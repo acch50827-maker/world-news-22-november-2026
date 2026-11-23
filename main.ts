@@ -1,4 +1,5 @@
-import { writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { deflateSync } from "node:zlib";
 
 // World News - 22 November 2026. Deterministic newspaper front page,
@@ -7,7 +8,8 @@ import { deflateSync } from "node:zlib";
 
 const W = 1024;
 const H = 1024;
-const OUT = "world-news-22-november-2026.png";
+const OUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+const OUT = join(OUT_DIR, "entry.png");
 
 const WHITE: [number, number, number] = [250, 248, 240];
 const PAPER: [number, number, number] = [250, 248, 240];
@@ -360,6 +362,7 @@ function drawFrontPage(): void {
 function main(): void {
   drawFrontPage();
   const png = encodePng();
+  mkdirSync(OUT_DIR, { recursive: true });
   writeFileSync(OUT, png);
   console.log(`Wrote ${OUT} (${png.length} bytes, ${W}x${H})`);
 }

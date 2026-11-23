@@ -15,10 +15,10 @@ The lead story is the COP31 climate summit in Antalya, Turkey, which ended witho
 ## Run
 
 ```sh
-node main.ts
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
 
-This generates `world-news-22-november-2026.png` (1024x1024) in the repository root.
+This generates `out/entry.png` (1024x1024).
 
 ## Bounty
 
